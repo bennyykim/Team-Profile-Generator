@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
-const Employee = require('./lib/Employee');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
+const fs = require('fs');
 
 const employee = [];
 
@@ -83,7 +83,7 @@ function createEngineer() {
             message:'What is the Github user?',
         }
     ]).then((data) => {
-        const engineer = new Engineer(data.name, data.id, data.email, data.github)
+        const engineer = new Engineer(data.name, data.id, data.email, data.github);
         employee.push(engineer);
         console.log(engineer);
         menuPrompt();
@@ -113,7 +113,7 @@ function createIntern() {
             message:'What school?',
         }
     ]).then((data) => {
-        const intern = new Intern(data.name, data.id, data.email, data.school)
+        const intern = new Intern(data.name, data.id, data.email, data.school);
         employee.push(intern);
         console.log(intern);
         menuPrompt();
@@ -198,14 +198,14 @@ const generateTeam = team => {
         .join("")
     );
     console.log('complete');
-    return html.join("");
-
+    const donezo = html.join("");
+    console.log(donezo);
+    generateFile(donezo);
 }
 
 // export function to generate entire page
-module.exports = team => {
 
-    return `
+const generateFile = donezo => { fs.appendFile('index.html', `
     <!DOCTYPE html>
 <html lang="en">
 
@@ -231,11 +231,12 @@ module.exports = team => {
     <div class="container">
         <div class="row">
             <div class="team-area col-12 d-flex justify-content-center">
-                ${generateTeam(team)}
+                ${donezo}
             </div>
         </div>
     </div>
 </body>
 </html>
-    `;
-};
+    `, (err) => 
+    err ? console.error(err) : console.log('donzo'));
+}
