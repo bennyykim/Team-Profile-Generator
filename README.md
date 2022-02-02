@@ -1,1 +1,1 @@
-# Team-Profile-Generator
+An application that will generate team cards through node and create an HTML page.
