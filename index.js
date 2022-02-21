@@ -233,5 +233,5 @@ const generateFile = fullTeam => { fs.appendFile('index.html', `
 </body>
 </html>
     `, (err) => 
-    err ? console.error(err) : console.log('donzo'));
+    err ? console.error(err) : console.log('Build Complete'));
 }
