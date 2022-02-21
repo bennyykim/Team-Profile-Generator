@@ -22,7 +22,6 @@ function menuPrompt() {
                 createIntern();
                 break;
             case 'Finish Building':
-                console.log(employee);
                 generateTeam(employee);
                 break;
             
@@ -55,7 +54,6 @@ function createManager() {
     ]).then((data) => {
         const manager = new Manager(data.name, data.id, data.email, data.officeNumber)
         employee.push(manager);
-        console.log(manager);
         menuPrompt();
     })
 };
@@ -85,7 +83,6 @@ function createEngineer() {
     ]).then((data) => {
         const engineer = new Engineer(data.name, data.id, data.email, data.github);
         employee.push(engineer);
-        console.log(engineer);
         menuPrompt();
     })
 };
@@ -115,7 +112,6 @@ function createIntern() {
     ]).then((data) => {
         const intern = new Intern(data.name, data.id, data.email, data.school);
         employee.push(intern);
-        console.log(intern);
         menuPrompt();
     })
 };
@@ -197,15 +193,14 @@ const generateTeam = team => {
         .map(intern => generateIntern(intern))
         .join("")
     );
-    console.log('complete');
-    const donezo = html.join("");
-    console.log(donezo);
-    generateFile(donezo);
+
+    const fullTeam = html.join("");
+    generateFile(fullTeam);
 }
 
 // export function to generate entire page
 
-const generateFile = donezo => { fs.appendFile('index.html', `
+const generateFile = fullTeam => { fs.appendFile('index.html', `
     <!DOCTYPE html>
 <html lang="en">
 
@@ -231,7 +226,7 @@ const generateFile = donezo => { fs.appendFile('index.html', `
     <div class="container">
         <div class="row">
             <div class="team-area col-12 d-flex justify-content-center">
-                ${donezo}
+                ${fullTeam}
             </div>
         </div>
     </div>
